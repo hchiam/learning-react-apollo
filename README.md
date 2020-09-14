@@ -247,7 +247,7 @@ const [createPost, { loading, error, data }] = useSubscription(GET_POST, {
 (The Apollo cache is only on the client side.)
 
 <details>
-<summary>Set `fetchPolicy` option to `"network-first"`</summary>
+<summary>Set fetchPolicy option to "network-first"</summary>
 
 ```js
 const { loading, error, data } = useQuery(GET_POSTS, {
@@ -297,7 +297,7 @@ function EditPost({ id }) {
 ## Refetch queries:
 
 <details>
-<summary>Refetch queries with `useQuery`'s `refetch` when `useMutation` `onCompleted`</summary>
+<summary>Refetch queries with useQuery's refetch when useMutation onCompleted</summary>
 
 (like when, after deleting some DB data in the BE, you want to update the UI in the FE)
 
@@ -315,7 +315,7 @@ const [deletePost] = useMutation(DELETE_POST, {
 </details>
 
 <details>
-<summary>Refetch queries with `useMutation`'s `refetchQueries` option</summary>
+<summary>Refetch queries with useMutation's refetchQueries option</summary>
 
 ```js
 const arrayOfQueriesToRefetchAfterwards = [
