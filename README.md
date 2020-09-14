@@ -4,11 +4,11 @@ Just one of the things I'm learning. <https://github.com/hchiam/learning>
 
 My notes based off of <https://codeartistry.io/the-react-apollo-2020-cheatsheet>
 
-Apollo = "frontend+backend connector"
+Apollo = "frontend+backend connector" = "FE+BE connector"
 
 Apollo gives us custom hooks to do this:
 
-    React (UI) <-> Apollo <-> GraphQL (database + files)
+    React (UI, FE) <-> Apollo <-> GraphQL (database + files, BE)
 
 Core Apollo hooks:
 
