@@ -30,7 +30,7 @@ Apollo gives us custom hooks to do this:
 - refetch queries with `useMutation`'s `refetchQueries` option
 - access the Apollo client with `useApolloClient` or `new ApolloClient` (both give you a promise that you need to `.then` and `.catch`)
 
-## Apollo setup:
+## Apollo setup: (with [`yarn`](https://github.com/hchiam/learning-yarn))
 
 If you only need to _"manually"_ trigger queries and mutations in your app:
 
