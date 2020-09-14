@@ -143,6 +143,15 @@ const GET_POST = gql`
 // btw, "!" means non-nullable; GraphQL types are nullable by default.
 ```
 
+There's also:
+
+```js
+client.resetStore().then(console.log("...")); // resetStore() is async!
+client.readData();
+client.writeData();
+// and more!
+```
+
 </details>
 
 ## Apollo convenience hooks:
