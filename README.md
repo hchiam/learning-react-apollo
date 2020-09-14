@@ -32,7 +32,7 @@ Apollo gives us custom hooks to do this:
 
 ## Apollo setup:
 
-If you only need to _"manually"_ trigger queries nad mutations in your app:
+If you only need to _"manually"_ trigger queries and mutations in your app:
 
 ```bash
 yarn add @apollo/react-hooks apollo-boost graphql
