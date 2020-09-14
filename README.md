@@ -1,4 +1,4 @@
-# Learning React + Apollo (+ GraphQL)
+# Learning React + Apollo (+ [GraphQL](https://github.com/hchiam/learning-graphql))
 
 Just one of the things I'm learning. <https://github.com/hchiam/learning>
 
