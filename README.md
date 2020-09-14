@@ -71,3 +71,163 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 ```
+
+<details>
+<summary>Apollo client</summary>
+
+## Apollo client
+
+You can directly use the Apollo client, but it gives you a promise that you have to `.then` and `.catch`:
+
+```jsx
+import { ApolloProvider } from "@apollo/react-hooks";
+// ...
+return <ApolloProvider client={client}>{/* ... */}</ApolloProvider>;
+```
+
+```js
+// import GET_POST, GET_POSTS, CREATE_POST
+
+client
+  .query({ query: GET_POSTS, variables: { limit: 5 } })
+  .then((res) => console.log(res.data))
+  .catch((err) => console.error(err));
+
+client
+  .mutate({ mutation: CREATE_POST, variables: { title: "...", body: "..." } })
+  .then((res) => console.log(res.data))
+  .catch((err) => console.error(err));
+
+client
+  .subscribe({ subscription: GET_POST, variables: { id: "..." } })
+  .then((res) => console.log(res.data))
+  .catch((err) => console.error(err));
+```
+
+```js
+import { gql } from "apollo-boost";
+// or
+import gql from "graphql-tag";
+
+const GET_POSTS = gql`
+  query GetPosts($limit: Int) {
+    posts(limit: $limit) {
+      id
+      body
+      title
+      createdAt
+    }
+  }
+`;
+
+const CREATE_POST = gql`
+  mutation CreatePost($title: String!, $body: String!) {
+    insert_posts(objects: { title: $title, body: $body }) {
+      affected_rows
+    }
+  }
+`;
+
+const GET_POST = gql`
+  subscription GetPost($id: uuid!) {
+    posts(where: { id: { _eq: $id } }) {
+      id
+      body
+      title
+      createdAt
+    }
+  }
+`;
+
+// btw, "!" means non-nullable; GraphQL types are nullable by default.
+```
+
+</details>
+
+## Apollo convenience hooks:
+
+<details>
+<summary>useQuery</summary>
+
+## `useQuery` = "get x1"
+
+```jsx
+const { loading, error, data } = useQuery(GET_POSTS, {
+  variables: { limit: 5 },
+});
+// loading: boolean
+// error: boolean
+// data: data
+// ...: (other destructured variables)
+
+if (loading) return <div>Loading...</div>;
+if (error) return <div>Error...</div>;
+return data.posts.map((post) => <div key={post.id}>post.text</div>);
+```
+
+</details>
+
+<details>
+<summary>useLazyQuery</summary>
+
+## `useLazyQuery` = "await get x1"
+
+```jsx
+const [searchPosts, { data }] = useLazyQuery(SEARCH_POSTS, {
+  variables: { query: `%${query}%` },
+});
+// (first item in array): query function
+// {...}: object that contains { loading, error, data, called, ... }
+useEffect(() => {
+  // ...
+  searchPosts();
+  if (data) setResults(data.posts);
+}, [query, data, searchPosts]);
+if (called && loading) return <div>Loading...</div>;
+return results.map((result) => <div key={result.id}>result.text</div>);
+```
+
+</details>
+
+<details>
+<summary>useMutation</summary>
+
+## `useMutation` = "change"
+
+`import { useMutation } from '@apollo/react-hooks';` and then:
+
+```js
+const [createPost, { loading, error, data }] = useMutation(CREATE_POST);
+// (first item in array): mutation function
+// {...}: object that contains { loading, error, data, ... }
+// you can use "loading" variable to debounce
+```
+
+or
+
+```js
+const [createPost, { loading, error, data }] = useMutation(CREATE_POST, {
+  onCompleted: (data) => console.log(data),
+  onError: (error) => console.error(error),
+});
+```
+
+</details>
+
+<details>
+<summary>useSubscription</summary>
+
+## `useSubscription` = "get whenever updates"
+
+`import { useSubscription } from '@apollo/react-hooks';` and then:
+
+```js
+const [createPost, { loading, error, data }] = useSubscription(GET_POST, {
+  variables: { id },
+  shouldResubscribe: true, // run query GET_POST when props change (default is false)
+  onSubscriptionData: (data) => console.log("new data", data), // when subscription hook gets new data
+  fetchPolicy: "network-only", // (default is 'cache-first')
+});
+```
+
+</details>
