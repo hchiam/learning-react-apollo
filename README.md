@@ -21,8 +21,8 @@ Apollo gives us custom hooks to do this:
 
 ### You can use Apollo hooks to:
 
-- manually set the `fetch` policy, to override old Apollo local cache
-- "manually" update the cache upon mutation, to override old Apollo local cache
+- manually set the `fetchPolicy` option to `"network-first"`, to override old Apollo local cache
+- "manually" update the local cache query upon mutation, to override old Apollo local cache
 - refetch queries with `useQuery`'s `refetch` when `useMutation` `onCompleted`
 
   - (like when you want to update UI in the FE after deleting some DB data in the BE)
@@ -228,6 +228,58 @@ const [createPost, { loading, error, data }] = useSubscription(GET_POST, {
   onSubscriptionData: (data) => console.log("new data", data), // when subscription hook gets new data
   fetchPolicy: "network-only", // (default is 'cache-first')
 });
+```
+
+</details>
+
+## Overriding the local Apollo cache when it's old:
+
+(The Apollo cache is only on the client side.)
+
+<details>
+<summary>Set `fetchPolicy` option to `"network-first"`</summary>
+
+```js
+const { loading, error, data } = useQuery(GET_POSTS, {
+  variables: { limit: 5 },
+  fetchPolicy: "network-first", // instead of the default 'cache-first'
+});
+```
+
+Options for `fetchPolicy`:
+
+- `cache-and-network`
+- `cache-first` (default)
+- `cache-only`
+- `network-only`
+- `no-cache`
+- `standby`
+
+</details>
+
+<details>
+<summary>Update local cache query upon mutation</summary>
+
+Notice `cache.writeQuery` inside the `update` option inside `useMutation`:
+
+```js
+function EditPost({ id }) {
+  const [updatePost] = useMutation(UPDATE_POST, {
+    update: (cache, data) => {
+      const { posts } = cache.readQuery(GET_POSTS);
+      const newPost = data.update_posts.returning;
+
+      // old posts -> new posts:
+      const updatedPosts = posts.map((post) =>
+        post.id === id ? newPost : post
+      );
+
+      // update local cache query:
+      cache.writeQuery({ query: GET_POSTS, data: { posts: updatedPosts } });
+    },
+    onCompleted: () => history.push("/"),
+  });
+}
 ```
 
 </details>
