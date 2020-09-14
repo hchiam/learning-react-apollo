@@ -25,8 +25,9 @@ Apollo gives us custom hooks to do this:
 - "manually" update the local cache query upon mutation, to override old Apollo local cache
 - refetch queries with `useQuery`'s `refetch` when `useMutation` `onCompleted`
 
-  - (like when you want to update UI in the FE after deleting some DB data in the BE)
+  - (like when, after deleting some DB data in the BE, you want to update the UI in the FE)
 
+- refetch queries with `useMutation`'s `refetchQueries` option
 - access the Apollo client with `useApolloClient` or `new ApolloClient` (both give you a promise that you need to `.then` and `.catch`)
 
 ## Apollo setup:
@@ -280,6 +281,40 @@ function EditPost({ id }) {
     onCompleted: () => history.push("/"),
   });
 }
+```
+
+</details>
+
+## Refetch queries:
+
+<details>
+<summary>Refetch queries with `useQuery`'s `refetch` when `useMutation` `onCompleted`</summary>
+
+(like when, after deleting some DB data in the BE, you want to update the UI in the FE)
+
+The following code basically says "re-get data when complete change":
+
+```js
+const { loading, data, refetch } = useQuery(GET_POSTS); // useQuery = "get"
+// ...
+const [deletePost] = useMutation(DELETE_POST, {
+  // mutation = "change"
+  onCompleted: () => refetch(), // "change complete"
+});
+```
+
+</details>
+
+<details>
+<summary>Refetch queries with `useMutation`'s `refetchQueries` option</summary>
+
+```js
+const arrayOfQueriesToRefetchAfterwards = [
+  { query: GET_POSTS, variables: { limit: 5 } },
+];
+const [createPost] = useMutation(CREATE_POST, {
+  refetchQueries: arrayOfQueriesToRefetchAfterwards,
+});
 ```
 
 </details>
