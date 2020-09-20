@@ -4,6 +4,8 @@ Just one of the things I'm learning. <https://github.com/hchiam/learning>
 
 My notes based off of <https://codeartistry.io/the-react-apollo-2020-cheatsheet>
 
+More on React: <https://github.com/hchiam/learning-reactjs>
+
 ## Big picture summary:
 
 Apollo = "frontend+backend connector" = "FE+BE connector"
