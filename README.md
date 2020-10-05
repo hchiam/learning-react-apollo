@@ -76,7 +76,7 @@ const client = new ApolloClient({
 ```
 
 <details>
-<summary>Apollo client</summary>
+<summary>Apollo client (and some `gql` stuff)</summary>
 
 ## Apollo client
 
