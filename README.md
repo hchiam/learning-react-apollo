@@ -142,7 +142,7 @@ const GET_POST = gql`
   }
 `;
 
-// btw, "!" means non-nullable; GraphQL types are nullable by default.
+// btw, "!" means non-nullable/required; GraphQL types are nullable by default.
 ```
 
 There's also:
