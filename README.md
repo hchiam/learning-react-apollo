@@ -329,3 +329,16 @@ const [createPost] = useMutation(CREATE_POST, {
 ```
 
 </details>
+
+<details>
+<summary>Accessing/using the Apollo client with `useApolloClient`</summary>
+
+```js
+const client = useApolloClient(); // same as new ApolloClient();
+
+client()
+  .resetStore() // note: resetStore is async!
+  .then(() => console.log("..."));
+```
+
+</details>
