@@ -342,3 +342,17 @@ client()
 ```
 
 </details>
+
+## Hasura -> Heroku -> Codesandbox -> live demo: <https://vw9i2.csb.app>
+
+1. <https://hasura.io/docs/1.0/graphql/core/deployment/deployment-guides/heroku.html> -> "Deploy to Heroku"
+
+2. <https://react-graphql1-2.herokuapp.com/console> to run/try GraphQL queries
+
+   - (or [login](https://hasura.io/docs/1.0/graphql/core/deployment/deployment-guides/heroku.html#heroku-secure) to access <https://react-graphql1.herokuapp.com/console>)
+
+3. -> create something like this: <https://codesandbox.io/s/github/hchiam/react-apollo-gql-example>
+
+(Backed up on GitHub at: <https://github.com/hchiam/react-apollo-gql-example>)
+
+(More info: <https://codeartistry.io/the-react-graphql-2020-crash-course>)
