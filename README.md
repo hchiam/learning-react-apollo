@@ -2,6 +2,8 @@
 
 Just one of the things I'm learning. <https://github.com/hchiam/learning>
 
+Example: <https://github.com/hchiam/learning-react-apollo#hasura---heroku---codesandbox---live-demo-httpsvw9i2csbapp>
+
 My notes based off of <https://codeartistry.io/the-react-apollo-2020-cheatsheet>
 
 More on React: <https://github.com/hchiam/learning-reactjs>
@@ -356,3 +358,19 @@ client()
 (Backed up on GitHub at: <https://github.com/hchiam/react-apollo-gql-example>)
 
 (More info: <https://codeartistry.io/the-react-graphql-2020-crash-course>)
+
+### Example uses:
+
+index.js --> App.js --> things like Post.js, to
+
+```js
+const DELETE_POST = gql`
+  ...
+`;
+```
+
+<https://github.com/hchiam/react-apollo-gql-example/blob/main/src/index.js>
+
+<https://github.com/hchiam/react-apollo-gql-example/blob/main/src/App.js>
+
+<https://github.com/hchiam/react-apollo-gql-example/blob/main/src/components/NewPost.js>
