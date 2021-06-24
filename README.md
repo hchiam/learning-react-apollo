@@ -8,6 +8,11 @@ My notes based off of <https://codeartistry.io/the-react-apollo-2020-cheatsheet>
 
 More on React: <https://github.com/hchiam/learning-reactjs>
 
+Apollo vs [Axios](https://github.com/hchiam/learning-axios):
+
+- Apollo = GraphQL API
+- Axios = REST API
+
 ## Big picture summary:
 
 Apollo = "frontend+backend connector" = "FE+BE connector"
