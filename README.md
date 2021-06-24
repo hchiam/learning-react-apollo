@@ -373,4 +373,6 @@ const DELETE_POST = gql`
 
 <https://github.com/hchiam/react-apollo-gql-example/blob/main/src/App.js>
 
+<https://github.com/hchiam/react-apollo-gql-example/blob/main/src/components/Post.js>
+
 <https://github.com/hchiam/react-apollo-gql-example/blob/main/src/components/NewPost.js>
